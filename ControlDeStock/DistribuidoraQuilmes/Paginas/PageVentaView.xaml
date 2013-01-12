@@ -1,0 +1,149 @@
+﻿<Page x:Class="DistribuidoraQuilmes.Paginas.PageVentaView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="900"
+	Title="PageVentaView">
+
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="Black" Offset="0.0" />
+            <GradientStop Color="BlueViolet" Offset="0.03" />
+            <GradientStop Color="Blue"  Offset="0.5" />
+            <GradientStop Color="Aqua" Offset="0.95" />
+            <GradientStop Color="LimeGreen" Offset="1.0" />
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Border Margin="10" BorderThickness="2,2,2,2" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
+                <RowDefinition />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="10" />
+                <RowDefinition />
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--COSAS A IZQUIERDA-->
+            <StackPanel  Grid.Row="0" Grid.RowSpan="3" HorizontalAlignment="Left" Orientation="Horizontal">
+                <Button Name="bInicio" Click="bInicio_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/inicio.png" />
+                </Button>
+                <Button Name="bVerPlanillaDeCarga" Click="bVerPlanillaDeCarga_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/carga.png"/>
+                </Button>
+            </StackPanel>
+
+            <WrapPanel Name="wrapPanel1" Grid.Row="3">
+                <Label Style="{StaticResource headerTextStyle}">Reparto</Label>
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=Ciudad}"/>
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=Fecha}"/>
+            </WrapPanel>
+
+            <WrapPanel Name="wrapPanel2" Grid.Row="4" HorizontalAlignment="Right">
+                <Label Style="{StaticResource headerTextStyle}">Nueva venta</Label>
+                <ComboBox Height="23" Name="comboBox1" Width="120" ItemsSource="{Binding}" DisplayMemberPath="NombreCompleto" SelectedValuePath="ID"/>
+            </WrapPanel>
+
+            <StackPanel Grid.Row="4" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="bAddVenta" Click="bAddVenta_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/agregar.png"/>
+                </Button>
+            </StackPanel>
+
+            <WrapPanel Name="wrapPanel4" Grid.Row="5">
+                <Image Name="image1" Source="/DistribuidoraQuilmes;component/imagenes/cliente.png" />
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=NombreCompleto}"/>
+            </WrapPanel>
+            <WrapPanel Name="wrapPanel5" Grid.Row="6">
+                <Image Name="image2" Source="/DistribuidoraQuilmes;component/imagenes/telefono.png" />
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=Telefono}"/>
+            </WrapPanel>
+            <WrapPanel Name="wrapPanel6" Grid.Row="7">
+                <Image Name="image3" Source="/DistribuidoraQuilmes;component/imagenes/movil.png" />
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=Movil}"/>
+            </WrapPanel>
+
+            <WrapPanel Name="wrapPanel0" Grid.Row="9">
+                <Label Style="{StaticResource headerTextStyle}">Cuenta Corriente</Label>
+            </WrapPanel>
+
+            <DockPanel  Grid.Row="11" Grid.RowSpan="1" Grid.Column="0" Grid.ColumnSpan="3" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid AutoGenerateColumns="False" Name="dataGrid2" ItemsSource="{Binding}" CanUserResizeRows="False" AlternatingRowBackground="Gainsboro"  AlternationCount="2" >
+                    <DataGrid.Columns>
+                        <DataGridComboBoxColumn x:Name="ComboBoxColumn" Header="Tipo" MinWidth="60" ItemsSource="{Binding TipoCCList}" SelectedItemBinding="{Binding Path=TipoCC}" />
+                        <DataGridTextColumn Header="Detalle" MinWidth="200" Width="*" Binding="{Binding Path=Detalle}" />
+                        <DataGridTextColumn Header="Monto" MinWidth="50" Binding="{Binding Path=Monto}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+
+            <StackPanel Grid.Row="13" Grid.ColumnSpan="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="bAdd" Click="bAdd_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/agregar.png"/>
+                </Button>
+                <Button Name="bRemove" Click="bRemove_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/eliminar.png"/>
+                </Button>
+            </StackPanel>
+
+            <!--COSAS A DERECHA-->
+            <WrapPanel Name="wrapPanel3" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="4" HorizontalAlignment="Center">
+                <Button Name="bAnterior" Click="bAnterior_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/anterior.png" />
+                </Button>
+                <Label Style="{StaticResource headerTextStyle}">Venta</Label>
+                <TextBox Style="{StaticResource headerTextStyle}" Text="{Binding Path=Index}" />
+                <Label Style="{StaticResource headerTextStyle}">de</Label>
+                <Label Style="{StaticResource headerTextStyle}" Content="{Binding Path=Count}"/>
+                <Button Name="bSiguiente" Click="bSiguiente_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/siguiente.png" />
+                </Button>
+            </WrapPanel>
+
+            <DockPanel  Grid.Row="2" Grid.RowSpan="10" Grid.Column="4" Grid.ColumnSpan="3" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <DataGrid AutoGenerateColumns="False" Name="dataGrid1" ItemsSource="{Binding}" CanUserResizeRows="False" AlternatingRowBackground="Gainsboro"  AlternationCount="2" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Código" MinWidth="50" Binding="{Binding Path=Codigo}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Detalle" MinWidth="200" Width="*" Binding="{Binding Path=Detalle}" IsReadOnly="True" />
+                        <DataGridTextColumn Header="Precio" MinWidth="50" Binding="{Binding Path=Precio}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Cantidad" MinWidth="50" Binding="{Binding Path=Cantidad}"/>
+                        <DataGridTextColumn Header="Subtotal" MinWidth="50" Binding="{Binding Path=Subtotal, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+            
+            <WrapPanel Name="wrapPanel7" Grid.Row="13" Grid.Column="4" VerticalAlignment="Center" HorizontalAlignment="Left">
+                <Label Style="{StaticResource headerBlackTextStyle}">Total</Label>
+                <TextBlock Style="{StaticResource headerBlackTextStyle}" Text="{Binding Path=Total, StringFormat='{}{0:C}'}"  />
+            </WrapPanel>
+
+            <WrapPanel Name="wrapPanel8" Grid.Row="13" Grid.Column="6" HorizontalAlignment="Right">
+                <Button Name="bImprimir" Click="bImprimir_Click">
+                    <Image Source="/DistribuidoraQuilmes;component/imagenes/imprime.png" />
+                </Button>
+            </WrapPanel>
+        </Grid>
+    </Border>
+</Page>
